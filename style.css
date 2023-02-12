@@ -1,0 +1,33 @@
+.char {
+  border-radius: 50px;
+  margin: 10px auto;
+  width: 70%;
+  height: 50px;
+  background: #eee;
+  position: relative;
+}
+
+.char .input-group {
+  border-radius: 50px;
+  width: 60%;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.form-control:focus,
+#button-addon2:focus {
+  box-shadow: none;
+}
+
+.info {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+span {
+  cursor: pointer;
+  color: red;
+}
