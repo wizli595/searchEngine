@@ -25,6 +25,7 @@ async function getApi(url) {
     infoCard.innerHTML =
       "wow that's not good try it again and be more specific";
   }
+  console.log(data);
   readData(data);
 }
 let infoCard = document.querySelector(".info");
@@ -48,7 +49,7 @@ function readData(data) {
     bCard.className = "card-body";
     let animeT = document.createElement("h5");
     animeT.className = "card-title";
-    animeT.innerHTML = `${data.data[i].title}::${data.data[i].type} `;
+    animeT.innerHTML = `${data.data[i].title} `;
     let animeSummary = document.createElement("p");
     let parag = document.createElement("div");
     parag.style.height = "300px";
@@ -59,6 +60,7 @@ function readData(data) {
     //end body
     //the over flow
     let spn = document.createElement("span");
+    spn.className = "read";
     spn.innerText = "Readmore ...";
     spn.addEventListener("click", (e) => {
       if (parag.style.overflow == "hidden") {
@@ -77,17 +79,28 @@ function readData(data) {
     genre.className = "list-group-item";
     genre.innerHTML = `the genre : ${data.data[i].genres}.`;
     let animeStatus = document.createElement("li");
+    let eps = document.createElement("span");
+    eps.className = "episod";
+    eps.innerText = data.data[i].episodes;
     animeStatus.className = "list-group-item";
-    animeStatus.innerHTML = `this anime is ${data.data[i].status} with total of ${data.data[i].episodes} `;
+    animeStatus.innerHTML = `this anime is ${data.data[i].status} with total of `;
+    animeStatus.append(eps);
     //end list
     // footer card
     let fCard = document.createElement("div");
     fCard.className = "card-footer";
-    let btnCard = document.createElement("a");
+    let form = document.createElement("form");
+    form.setAttribute("action", "watch.html");
+    let btnCard = document.createElement("input");
+    btnCard.setAttribute("type", "submit");
+    btnCard.setAttribute("value", "watch it");
     btnCard.className = "btn btn-primary";
-    btnCard.innerHTML = "watch it";
+    btnCard.setAttribute("id", data.data[i].title);
+    btnCard.addEventListener("click", local);
+
     //end
     fCard.appendChild(btnCard);
+    form.appendChild(fCard);
     list.appendChild(genre);
     list.appendChild(animeStatus);
     bCard.appendChild(animeT);
@@ -96,7 +109,13 @@ function readData(data) {
     card.appendChild(poster);
     card.appendChild(bCard);
     card.appendChild(list);
-    card.appendChild(fCard);
+    card.appendChild(form);
     infoCard.appendChild(card);
   }
+}
+function local() {
+  let Aname = this.getAttribute("id");
+  console.log(Aname);
+  localStorage.setItem("nameAnime", Aname);
+  return false;
 }
