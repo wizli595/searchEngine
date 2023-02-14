@@ -1,5 +1,13 @@
-let spn = document.querySelector("span");
-let kk = localStorage.getItem("nameAnime").replace(" ", "-");
+let title = localStorage
+  .getItem("nameAnime")
+  .replace(" ", "-")
+  .replace(":", "")
+  .toLowerCase();
+let big = document.querySelector("h1");
+big.innerHTML = localStorage.getItem("nameAnime");
+let box = document.querySelector(".list");
+let url = `https://gogoanime2.p.rapidapi.com/anime-details/${title}`;
+
 const options = {
   method: "GET",
   headers: {
@@ -7,23 +15,21 @@ const options = {
     "X-RapidAPI-Host": "gogoanime2.p.rapidapi.com",
   },
 };
-
-let url = `https://gogoanime2.p.rapidapi.com/vidcdn/watch/${kk}-episode-8`;
 async function getApi(url) {
   const response = await fetch(url, options);
   var data = await response.json();
-  console.log(data);
-  watch(data);
+  showData(data);
 }
-let list = document.querySelector(".list");
-function watch(data) {
-  for (i = 0; i < 10; i++) {
+function showData(data) {
+  let d = data.episodesList;
+  for (i = 0; i < d.length; i++) {
+    console.log(d[d.length - i - 1]);
     let ep = document.createElement("span");
     let link = document.createElement("a");
-    link.innerHTML = "episode";
-    link.setAttribute("href", data.Referer);
-    ep.append(link);
-    list.append(ep);
+    link.setAttribute("href", `${d[d.length - i - 1].episodeUrl}`);
+    link.innerText = `episode ${i + 1}`;
+    ep.appendChild(link);
+    box.appendChild(ep);
   }
 }
 getApi(url);
