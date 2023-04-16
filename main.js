@@ -1,10 +1,11 @@
 const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "0cd36d720cmsha08c21833644722p1ed12ejsnadfb5be146d0",
-    "X-RapidAPI-Host": "anime-db.p.rapidapi.com",
-  },
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '0cd36d720cmsha08c21833644722p1ed12ejsnadfb5be146d0',
+		'X-RapidAPI-Host': 'anime-db.p.rapidapi.com'
+	}
 };
+
 let inp = document.querySelector("input");
 let btn = document.querySelector("#button-addon2");
 btn.addEventListener("click", (e) => {
